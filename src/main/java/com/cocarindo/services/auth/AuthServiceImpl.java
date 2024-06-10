@@ -1,4 +1,4 @@
-package com.cocarindo.services;
+package com.cocarindo.services.auth;
 
 import com.cocarindo.entities.User;
 import com.cocarindo.enums.UserRole;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
 
@@ -30,5 +30,10 @@ public class AuthServiceImpl {
         } else {
             System.out.println("Admin account already exists!");
         }
+    }
+
+    @Override
+    public Boolean hasUserWithEmail(String email) {
+        return userRepository.findFirstByEmail(email).isPresent();
     }
 }
